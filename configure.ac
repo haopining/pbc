@@ -181,7 +181,7 @@ fi
 
 AM_CONDITIONAL(ENABLE_CXX, test $enable_cxx = yes)
 
-AC_CONFIG_FILES([Makefile example/Makefile gen/Makefile])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
 echo -ne "\n"
@@ -209,3 +209,5 @@ echo -ne "\n"
 
 syscmd(bison -d -b pbc/parser pbc/parser.y)
 syscmd(flex -o pbc/lex.yy.c --header-file=pbc/lex.yy.h pbc/parser.lex)
+
+echo "auto config done"

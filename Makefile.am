@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = subdir-objects
-SUBDIRS = . example gen
+SUBDIRS = .
 
 SO_VERSION = 1:0:0
 
