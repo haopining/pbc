@@ -11,10 +11,10 @@ else
     exit 1
 fi
 $LT --force --copy
-aclocal
+aclocal 
 autoheader
 automake --add-missing --copy --gnu
-autoconf
+autoconf 
 
 if test -f config.status; then
     sh config.status

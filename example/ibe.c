@@ -80,8 +80,7 @@ PT decryption(SK sk, CT ct) {
   element_t e_sk_U;
   element_init_GT(e_sk_U, pairing);
   element_pairing(e_sk_U, sk, ct.c1);
-  element_init_GT(plaintext.msg, pairing);
-  element_sub(plaintext.msg, ct.c2, e_sk_U);
+  // element_init_GT(plaintext.msg, pairing);
   return plaintext;
 }
 
@@ -129,6 +128,25 @@ int main(int argc, char const *argv[]) {
 #ifdef TIME
   printf("decryption exec time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
 #endif
+  start = clock();
+   // Initialize pairing and elements
+   pairing_t pairing;
+    element_t G, n, P;
+    pairing_init_set_str(pairing, param);
+   // 生成曲线上的基点G
+    element_init_G1(G, pairing);
+    element_random(G);
+
+    // 定义标量n和点P
+    element_init_Zr(n, pairing);
+    element_random(n);
+    element_init_G1(P, pairing);
+
+    // 在椭圆曲线上进行标量乘法，结果存储在P中
+    element_mul_zn(P, G, n);
+  end = clock();
+  printf("Tsm exec time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
+
 #ifdef DEBUG
   element_printf("ct1 = %B\nct2 = %B\nPT = %B\n", ct.c1, ct.c2, result.msg);
 #endif
